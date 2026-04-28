@@ -26,8 +26,8 @@
 
   function init() {
     Zabeg.PRODUCTS.forEach((product, index) => {
-      const min = [350000, 250000, 180000, 320000][index];
-      const max = [550000, 420000, 280000, 520000][index];
+      const min = [700000, 850000, 250000, 1100000][index];
+      const max = [1800000, 2100000, 380000, 2800000][index];
       const mid = (min + max) / 2;
       state.anchor[product.key] = { min, max, final: mid };
     });
