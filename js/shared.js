@@ -6,7 +6,7 @@
       key: "architecture",
       title: "Архитектура платформы Doctor.School",
       short: "Архитектура",
-      description: "Продуктовая архитектура цифровой экосистемы: компоненты, роли, сценарии и связи платформы."
+      description: "Экосистема Doctor.School: backend, фронты, роли; первый фронт — прототип приложения врача."
     },
     {
       key: "miniseries_ep1",
