@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Забег #1 — фасилитатор</title>
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body data-page="aggregate">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Забег #1</p>
+        <h1>Инструмент фасилитатора</h1>
+      </div>
+      <a class="ghost-link" href="index.html">Форма участника</a>
+    </header>
+
+    <main class="workspace">
+      <nav class="tabs" aria-label="Разделы фасилитатора">
+        <button class="tab active" data-tab="setup" type="button">Setup</button>
+        <button class="tab" data-tab="aggregate" type="button">Свести результаты</button>
+        <button class="tab" data-tab="results" type="button">Результаты</button>
+      </nav>
+
+      <section id="setupTab" class="tab-panel active">
+        <div class="grid two-col">
+          <section class="panel">
+            <div class="panel-title">
+              <div>
+                <p class="eyebrow">Участники</p>
+                <h2>Скоуп пула</h2>
+            </div>
+            <span class="muted" id="participantCount">0 человек</span>
+          </div>
+          <label class="field-label" for="participantsInput">Имена, по одному на строку</label>
+          <textarea id="participantsInput" class="textarea" rows="7">Anton
+Eduard
+Sasha
+Masha
+Igor</textarea>
+          <p class="helper-text">Кириллица в ссылке поддерживается через URL encoding. Не используйте запятые внутри имён.</p>
+        </section>
+
+          <section class="panel">
+            <div class="panel-title">
+              <div>
+                <p class="eyebrow">Слои</p>
+                <h2>Products / Glue</h2>
+              </div>
+              <strong id="splitLabel">70 / 30</strong>
+            </div>
+            <div class="split-bar" id="splitBar">
+              <div class="split-products"></div>
+              <div class="split-glue"></div>
+            </div>
+            <label class="field-label" for="productRatioInput">Доля продуктового слоя</label>
+            <input id="productRatioInput" class="range" type="range" min="0" max="100" value="70">
+          </section>
+        </div>
+
+        <section class="panel">
+          <div class="panel-title">
+            <div>
+              <p class="eyebrow">Рыночный якорь</p>
+              <h2>Веса продуктов</h2>
+            </div>
+            <div class="metric">
+              <span>Якорный пул</span>
+              <strong id="anchorPoolLabel">0 ₽</strong>
+            </div>
+          </div>
+          <p class="helper-text">Mid ₽ считается автоматически как среднее между min и max. Якорный пул — сумма auto-mid по четырём продуктам. Оценка после обсуждения по умолчанию равна Mid ₽; меняйте её только если команда решила скорректировать вес продукта.</p>
+          <div id="anchorTable" class="anchor-table"></div>
+          <div id="weightBars" class="weight-bars"></div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-title">
+            <div>
+              <p class="eyebrow">Ссылка</p>
+              <h2>Для команды</h2>
+            </div>
+            <button type="button" class="secondary-button" id="freezeButton">Заморозить веса</button>
+          </div>
+          <textarea id="teamLink" class="textarea code-output" readonly></textarea>
+          <div class="result-actions">
+            <button type="button" class="primary-button" id="copyLink">Копировать</button>
+            <span class="muted" id="linkStatus">Ссылка обновляется автоматически.</span>
+          </div>
+        </section>
+      </section>
+
+      <section id="aggregateTab" class="tab-panel">
+        <section class="panel">
+          <div class="panel-title">
+            <div>
+              <p class="eyebrow">Блоки участников</p>
+              <h2>Свести результаты</h2>
+            </div>
+            <span class="status-pill" id="parsedCount">0 блоков</span>
+          </div>
+          <label class="field-label" for="blocksInput">Вставьте сообщения из чата</label>
+          <textarea id="blocksInput" class="textarea" rows="10" placeholder="ZABEG-EVAL::..."></textarea>
+          <div id="parseErrors" class="warning-list"></div>
+        </section>
+
+        <div class="grid two-col">
+          <section class="panel">
+            <div class="panel-title">
+              <div>
+                <p class="eyebrow">Финальные веса</p>
+                <h2>Проверка setup</h2>
+              </div>
+            </div>
+            <div id="finalWeightsReview" class="compact-list"></div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-title">
+              <div>
+                <p class="eyebrow">Пул</p>
+                <h2>Размер выплаты</h2>
+              </div>
+            </div>
+            <label class="field-label" for="poolInput">Финальный пул ₽</label>
+            <input id="poolInput" class="input" type="number" min="0" step="1000">
+            <div id="poolStatus" class="pool-status"></div>
+            <button type="button" class="primary-button full-width" id="computeButton">Посчитать</button>
+          </section>
+        </div>
+      </section>
+
+      <section id="resultsTab" class="tab-panel">
+        <section class="panel">
+          <div class="panel-title">
+            <div>
+              <p class="eyebrow">Калибровка</p>
+              <h2>Self vs peer</h2>
+            </div>
+            <span class="muted">Жёлтым подсвечены расхождения выше 30%</span>
+          </div>
+          <div id="calibrationMount"></div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-title">
+            <div>
+              <p class="eyebrow">Итог</p>
+              <h2>Доли и выплаты</h2>
+            </div>
+            <button type="button" class="secondary-button" id="exportButton" disabled>Экспорт JSON/CSV</button>
+          </div>
+          <div id="summaryMount"></div>
+          <div id="resultMount" class="table-scroll"></div>
+        </section>
+      </section>
+    </main>
+
+    <script src="js/shared.js"></script>
+    <script src="js/aggregate.js"></script>
+  </body>
+</html>
