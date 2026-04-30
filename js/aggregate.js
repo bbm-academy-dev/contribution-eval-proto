@@ -6,7 +6,7 @@
     anchor: {},
     weights: {},
     initialWeights: {},
-    split: 70,
+    split: 75,
     blocks: [],
     pool: 0,
     overrides: {},
@@ -26,8 +26,8 @@
 
   function init() {
     Zabeg.PRODUCTS.forEach((product, index) => {
-      const min = [700000, 850000, 250000, 1100000][index];
-      const max = [1800000, 2100000, 380000, 2800000][index];
+      const min = [220000, 150000, 80000, 30000][index];
+      const max = [550000, 400000, 440000, 150000][index];
       const mid = (min + max) / 2;
       state.anchor[product.key] = { min, max, final: mid };
     });
