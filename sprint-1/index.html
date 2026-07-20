@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Забег #1 — форма участника</title>
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body data-page="eval">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Забег #1</p>
+        <h1>Форма участника</h1>
+      </div>
+      <a class="ghost-link" href="aggregate.html">Фасилитатор</a>
+    </header>
+
+    <main class="workspace eval-workspace">
+      <section class="panel intro-panel">
+        <div>
+          <h2>Оценка вклада</h2>
+          <p>Выберите имя, отметьте продукты, где вы реально участвовали, и распределите peer-баллы между остальными.</p>
+        </div>
+        <div class="status-pill" id="setupStatus">Ожидаю ссылку setup</div>
+      </section>
+
+      <form id="evalForm" class="form-stack" novalidate>
+        <section class="panel">
+          <label class="field-label" for="participantName">Ваше имя</label>
+          <select id="participantName" class="input"></select>
+        </section>
+
+        <section class="section-head">
+          <div>
+            <p class="eyebrow">Продуктовый слой</p>
+            <h2>4 продукта</h2>
+          </div>
+          <span class="muted">Self + peer по 10 баллов</span>
+        </section>
+        <div id="productsMount" class="form-stack"></div>
+
+        <section class="section-head">
+          <div>
+            <p class="eyebrow">Glue layer</p>
+            <h2>Общая ткань</h2>
+          </div>
+          <span class="muted">Только peer</span>
+        </section>
+        <section class="panel glue-panel" id="glueMount"></section>
+
+        <section class="panel result-panel">
+          <div class="result-actions">
+            <button type="submit" class="primary-button" id="submitButton" disabled>Готово</button>
+            <span id="formStatus" class="muted">Заполните обязательные поля</span>
+          </div>
+          <div id="outputBox" class="output-box hidden">
+            <label class="field-label" for="encodedOutput">Блок для чата звонка</label>
+            <textarea id="encodedOutput" class="textarea code-output" readonly></textarea>
+            <div class="result-actions">
+              <button type="button" class="secondary-button" id="copyOutput">Скопировать в буфер</button>
+              <span class="muted">Вставьте этот блок в чат звонка.</span>
+            </div>
+          </div>
+        </section>
+      </form>
+    </main>
+
+    <script src="js/shared.js"></script>
+    <script src="js/eval.js"></script>
+  </body>
+</html>
